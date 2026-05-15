@@ -43,3 +43,15 @@ async def test_get_cliente_inexistente(client):
     """
     response = await client.get("/clientes/000")
     assert response.status_code == 404
+
+async def test_criar_cliente_cpf_vazio(client):
+
+    response = await client.post(
+        "/clientes",
+        json={
+            "cpf": "",
+            "nome": "X"
+        }
+    )
+
+    assert response.status_code == 400
